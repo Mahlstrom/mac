@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap josegonzalez/php
 brew update
 # Install cask
 brew install caskroom/cask/brew-cask
