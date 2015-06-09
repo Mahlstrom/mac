@@ -45,5 +45,8 @@ function __prompter(){
 	fi
 }
 # ✨ 
+# ➜
 export PS1='$(__prompter)'$Yellow$PathShort$Color_Off' '
-export PATH="/usr/local/sbin:$PATH"
+#export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
