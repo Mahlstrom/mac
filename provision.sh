@@ -14,4 +14,4 @@ brew install watch
 brew cask install xquartz phpstorm sublime-text virtualbox vagrant
 
 # Installing sharing apps
-brew cask install dropbox copy box-sync
+brew cask install dropbox copy
