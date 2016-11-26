@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew tap josegonzalez/php
+brew tap mahlstrom/awsssh
 brew update
+brew install aws
+brew install awsssh
 # Install cask
 brew install caskroom/cask/brew-cask
 brew cask update
