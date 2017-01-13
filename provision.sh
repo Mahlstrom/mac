@@ -20,7 +20,7 @@ brew install watch
 # Install good programs to have
 brew cask install xquartz phpstorm sublime-text virtualbox vagrant
 brew cask install google-chrome iterm2
-brew install coreutils
+brew install coreutils git bash-completion
 
 # Installing sharing apps
 brew cask install dropbox
