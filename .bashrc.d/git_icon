@@ -1,0 +1,37 @@
+function __git_icon(){
+    local ISGIT
+    local ISREMOTE
+    [ -z ${ICON_UNTRACKED} ] && ICON_UNTRACKED='❓'
+    [ -z ${ICON_UNSTAGED} ] && ICON_UNSTAGED='❗'
+    [ -z ${ICON_STAGED} ] && ICON_STAGED='🚥'
+    [ -z ${ICON_AHEAD} ] && ICON_AHEAD='⬆'
+    [ -z ${ICON_GITOK} ] && ICON_GITOK='✓'
+    [ -z ${ICON_GITREMOTEOK} ] && ICON_GITREMOTEOK='✅'
+
+    ISGIT=$(git branch &>/dev/null)
+    if [ $? -eq 0 ]; then
+        string=$(git status)
+        if [[ $string == *"Untracked files"* ]]; then
+                echo -ne ${ICON_UNTRACKED}
+        elif [[ $string == *"Changes not staged for commit"* ]]; then
+                echo -ne ${ICON_UNSTAGED}
+        elif [[ $string == *"Changes to be committed:"* ]]; then
+                echo -ne ${ICON_STAGED}
+        elif [[ $string == *"Your branch is ahead of"* ]]; then
+                echo -ne ${ICON_AHEAD}
+        elif [[ $string == *"nothing to commit"* ]]; then
+            ISREMOTE=$(git config --get remote.origin.url &>/dev/null)
+            if [ $? -eq 0 ]; then
+                echo -ne ${ICON_GITREMOTEOK}
+            else
+                echo -ne ${ICON_GITOK}
+            fi
+        fi
+    fi
+}
+
+# ✈
+# 🚀
+# ⤴
+# ⤵
+# ⬅
