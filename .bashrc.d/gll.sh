@@ -1,6 +1,6 @@
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if ! type -t "__git_icon" > /dev/null; then
-    source ${DIR}/git_icon
+    source ~/.dotfiles/git/git_icon
 fi
 
 function gll(){

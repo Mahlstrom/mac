@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if ! type -t "__git_icon" > /dev/null; then
-    source ~/.dotfiles/.bashrc.d/git_icon
+    source ~/.dotfiles/git/git_icon
 fi
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 
