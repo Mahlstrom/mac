@@ -3,8 +3,7 @@ if ! type -t "__git_icon" > /dev/null; then
     source ~/.dotfiles/git/git_icon
 fi
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
-#OLD_PATH=$PATH
-#export OLD_PATH
+
 __prompt_command() {
     local EXIT="$?"             # This needs to be first
 	local gicon
@@ -16,8 +15,15 @@ __prompt_command() {
     local RCol='\[\e[0m\]'
 
 	gicon=$(__git_icon)
-    PS1=""
+    if test -z "$VIRTUAL_ENV" ; then
+      PS1=""
+    else
+      PP=$(basename $(dirname $VIRTUAL_ENV))
+      PS1="${BBlu}[${PP}]${RCol} "
+    fi
+
 	if [ ${gicon} ];then
+		PS1+="$gicon "
         THISGIT=$(git rev-parse --show-toplevel)
         #if [[ -d ${THISGIT}/bin ]]; then
         #    PATH=${THISGIT}/bin:$OLD_PATH
@@ -25,14 +31,13 @@ __prompt_command() {
         #if [[ -d ${THISGIT}/node_modules/.bin ]]; then
         #    PATH=${THISGIT}/node_modules/.bin:$PATH
         #fi
-		PS1+="$gicon "
     #else
         #PATH=$OLD_PATH
 	fi
 
     PS1+="${Pur}\w"
     if [ $EXIT != 0 ]; then
-        PS1+="${Red}[$EXIT]${RCol}"      # Add red if exit code non 0
+        PS1+="${BBlu}[$EXIT]${RCol}"      # Add red if exit code non 0
     fi
     PS1+="$RCol "
 }
