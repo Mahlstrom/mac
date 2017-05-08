@@ -61,17 +61,17 @@ __prompt_command() {
       PS1+="${FGL}${BYel}${triangle}"
       PS1+="${Bla}${BYel}"
       FGL=${Yel}
-      PS1+="$gicon "
       THISGIT=$(git rev-parse --show-toplevel)
       PS1+="$(parse_git_branch)"
-      PS1+=${Yel}
+      PS1+="$gicon "
     fi
     # EXIT
     if [ $EXIT != 0 ]; then
-      PS1+=${BRed}
-      PS1+=$triangle
-      PS1+="${Bla}${BRed}$EXIT"      # Add red if exit code non 0
-      FGL="${Red}"
+      PS1+="${FGL}${BRed}${triangle}"
+      PS1+="${Bla}${BRed}"
+      FGL=${Red}
+
+      PS1+="$EXIT"      # Add red if exit code non 0
     fi
 
     PS1+="${FGL}${BBla}"
