@@ -6,50 +6,55 @@ PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
+export BGL=""
+export FGL=""
+export EE=""
 
+do_the_arrow () {
+  local nBG=$1;
+  varname=B$nBG
+  echo -n "${FGL}${!varname}${triangle}${Bla}"
+}
 __prompt_command() {
     local EXIT="$?"             # This needs to be first
-    local BGL=""
-    local FGL=""
-
-	local gicon
-    local LOR='\e[0;34m';
-    local BTA="\e[47m"
-    local Bla='\e[0;30m'
-    local Red='\e[0;31m'
-    local Gre='\e[0;32m'
-    local Yel='\e[0;33m'
-    local Blu='\e[1;34m'
-    local Pur='\e[0;35m'
-    local RCol='\e[0m'
-
-    local BBla="\e[40m"
-    local BRed="\e[41m"
-    local BYel='\e[43m'
-    local BBlu='\e[44m'
-    local BPur='\e[45m'
-
+    local gicon
     local triangle=""
 
-	gicon=$(__git_icon)
+    local Bla="\[$(tput setaf 0)\]"
+    local BBla="\[$(tput setab 0)\]"
 
-    PS1=""
+    local Gra="\[$(tput setaf 236)\]"
+    local BGra="\[$(tput setab 236)\]"
+
+    local Blu="\[$(tput setaf 4)\]"
+    local BBlu="\[$(tput setab 4)\]"
+
+    local Red="\[$(tput setaf 1)\]"
+    local BRed="\[$(tput setab 1)\]"
+
+    local Yel="\[$(tput setaf 3)\]"
+    local BYel="\[$(tput setab 3)\]"
+
+    local RCol="\[$(tput sgr0)\]"
+    local EE=""
+
+
+    gicon=$(__git_icon)
+
+    PS1=""
 
     # Draw path
-    FGL="$Pur"
-    PS1+="${BPur}"
+    PS1+="${BGra}"
     PS1+="\w"
-
-
-
+    FGL="$Gra"
+ 
     # Draw virtualenv
     if test -z "$VIRTUAL_ENV" ; then
       BGL+=""
     else
-      PS1+="${FGL}${BBlu}${triangle}"
-      PS1+="${Bla}${BBlu}"
+      PS1+=$(do_the_arrow "Blu")
       FGL=${Blu}
-      PS1+="${Bla}${BBlu}"
+
       PP=$(basename $(dirname $VIRTUAL_ENV))
       PS1+="${PP}"
     fi
@@ -58,23 +63,22 @@ __prompt_command() {
 
     #GIT
     if [ ${gicon} ];then
-      PS1+="${FGL}${BYel}${triangle}"
-      PS1+="${Bla}${BYel}"
+      PS1+=$(do_the_arrow "Yel")     
       FGL=${Yel}
+
       THISGIT=$(git rev-parse --show-toplevel)
       PS1+="$(parse_git_branch)"
       PS1+="$gicon "
     fi
+
     # EXIT
     if [ $EXIT != 0 ]; then
-      PS1+="${FGL}${BRed}${triangle}"
-      PS1+="${Bla}${BRed}"
+      PS1+=$(do_the_arrow "Red")     
       FGL=${Red}
 
       PS1+="$EXIT"      # Add red if exit code non 0
     fi
 
-    PS1+="${FGL}${BBla}"
-    PS1+=$triangle
+    PS1+=$(do_the_arrow "Bla")
     PS1+="$RCol "
 }
