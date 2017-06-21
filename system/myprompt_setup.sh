@@ -41,7 +41,8 @@ __prompt_command() {
 
     gicon=$(__git_icon)
 
-    PS1=""
+    PS1=""
+    #PS1=""
 
     # Draw path
     PS1+="${BGra}"
