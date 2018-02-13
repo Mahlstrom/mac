@@ -4,7 +4,7 @@
 # https://gist.github.com/kujiy/c6afe3a8577e37af6566e1699bfc6f51
 
 # alias gs="git status"   # Unfortunately Ghost Script used `gs` already.
-alias gss="git status"
+alias gss="git status -s"
 alias gd="git diff"
 alias gb="git branch"
 alias gbr="git branch -r"
