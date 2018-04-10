@@ -9,3 +9,4 @@ done
 for file in $(find ~/.dotfiles -name *_func.sh) ; do
 	source $file
 done
+export GOPATH="$HOME/workspace/Go"
